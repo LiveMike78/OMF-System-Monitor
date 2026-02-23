@@ -1,0 +1,52 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# system-monitor — environment variable reference
+# Copy this file to .env and fill in your values.
+# .env is NOT committed to source control (add it to .gitignore).
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+# ── REQUIRED ─────────────────────────────────────────────────────────────────
+
+# Full URL of the OMF endpoint
+# PI Web API example : https://my-pi-server/piwebapi/omf
+# AVEVA Data Hub     : https://uswe.datahub.connect.aveva.com/api/v1/tenants/<tid>/namespaces/<ns>/omf
+# OSIsoft EDS        : http://localhost:5590/api/v1/tenants/default/namespaces/default/omf
+OMF_ENDPOINT=https://your-server/piwebapi/omf
+
+# Credentials for HTTP Basic Auth against the OMF endpoint
+OMF_USERNAME=your_username
+OMF_PASSWORD=your_password
+
+
+# ── OPTIONAL ─────────────────────────────────────────────────────────────────
+
+# How often to collect and send metrics (seconds). Default: 60
+INTERVAL_SECONDS=60
+
+# OMF Type ID — used as the schema name in PI / Data Hub. Default: SystemMetrics
+OMF_TYPE_ID=SystemMetrics
+
+# OMF Container ID — becomes the PI Tag / stream name prefix.
+# Defaults to the container's hostname (usually the Docker container ID).
+# Set this to something meaningful, e.g. the host machine name.
+OMF_CONTAINER_ID=webserver-01
+
+# Producer token — required by some OMF endpoints (e.g. PI Connector Relay).
+# Leave empty for PI Web API / EDS / Data Hub.
+OMF_PRODUCER_TOKEN=
+
+# Disk partition to report on. Default: /
+# If running without --pid=host and the host disk is bind-mounted,
+# set this to the mount point inside the container, e.g. /host-root
+DISK_PATH=/
+
+# Comma-separated list of network interface names to sum for network counters.
+# Leave empty to use all interfaces.
+# Example: eth0,ens3
+NET_INTERFACES=
+
+# Set to false to disable SSL certificate verification (not recommended in prod)
+VERIFY_SSL=true
+
+# Logging verbosity: DEBUG | INFO | WARNING | ERROR. Default: INFO
+LOG_LEVEL=INFO

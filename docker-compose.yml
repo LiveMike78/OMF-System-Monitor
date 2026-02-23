@@ -1,0 +1,31 @@
+services:
+  system-monitor:
+    build: .
+    image: system-monitor:latest
+    container_name: system-monitor
+
+    # Share the host's PID namespace so psutil reads real system metrics
+    pid: host
+
+    restart: unless-stopped
+
+    env_file:
+      - .env        # put secrets here; see .env.example
+
+    environment:
+      # Override any value from .env or set defaults here
+      INTERVAL_SECONDS: ${INTERVAL_SECONDS:-60}
+      LOG_LEVEL:         ${LOG_LEVEL:-INFO}
+      DISK_PATH:         ${DISK_PATH:-/}
+      VERIFY_SSL:        ${VERIFY_SSL:-true}
+
+    # Mount host disk paths for accurate disk monitoring if needed
+    volumes:
+      - /:/host-root:ro   # optional — only needed if DISK_PATH=/host-root
+
+    # Optional: resource limits for the container itself
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "0.10"
+    #       memory: 64M
