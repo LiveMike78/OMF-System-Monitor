@@ -1,6 +1,6 @@
 # System Resource Monitor — OMF Docker Image
 
-Collects host CPU, memory, disk, network, and load metrics at a configurable interval and forwards them via **OMF 1.1** (OSIsoft Message Format) to any compatible endpoint: PI Web API, AVEVA Data Hub, OSIsoft EDS, or a custom OMF relay.
+Collects host CPU, memory, disk, network, and load metrics at a configurable interval and forwards them via **OMF 1.1** (OSIsoft Message Format) to any compatible endpoint: PI Web API, CONNECT data services, OSIsoft EDS, or a custom OMF relay.
 
 ## Quick Start
 
@@ -75,5 +75,5 @@ The container sends three OMF message types on startup:
 
 - `--pid=host` (or `pid: host` in Compose) is strongly recommended so `psutil` reads real system-wide metrics rather than container-namespaced values.
 - For **PI Web API**, ensure the account has write access to the target AF database.
-- For **AVEVA Data Hub**, replace Basic Auth with the token flow and adapt headers if needed.
+- For **CONNECT data services**, replace Basic Auth with the token flow and adapt headers if needed.
 - SSL verification can be disabled with `VERIFY_SSL=false` for self-signed PI certs (not recommended in production).
